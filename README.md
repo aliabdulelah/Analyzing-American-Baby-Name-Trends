@@ -103,7 +103,7 @@ ORDER BY COUNT(first_name) DESC
 
 ### Results/Findings
 
-1- Classic American names
+### 1- Classic American names
 After conducting an analysis of classic American names, the dataset reveals the frequency of occurrences for each name, indicating that 'James' is the most common, followed closely by 'John' and 'William'
 
 | first_name | sum      |
