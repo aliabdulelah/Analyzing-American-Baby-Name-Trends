@@ -7,7 +7,7 @@
 - [Tools](#Tools)
 - [ Data Cleaning / Preparation](#Data-Cleaning-/-Preparation)
 - [Exploratory Data Analysis](#Exploratory-Data-Analysis)
-- [Results/Findings](#Results-Findings)
+- [Results/Findings](#Data-Analysis-Results-Findings)
 
 ## Project Overview
 By using the United States Social Security Administration data from 1920-to 2020, we analyze American baby name shifts. Explore trends, and changes in popular names over time, and compare century-old favorites with recent top names, offering insights relevant to both parents and businesses.
@@ -55,57 +55,20 @@ We'll use data published by the U.S. Social Security Administration spanning ove
 9. The most years at number one
 
 
-### Data Analysis
-Include some interesting code/features worked with
 
-```sql
-SELECT first_name ,
-       SUM(num),
-    RANK() OVER(ORDER BY SUM(num) DESC) AS name_rank
-FROM baby_names
-WHERE year >= 1920 AND sex = 'F'
-GROUP BY first_name
-ORDER BY name_rank ASC
-LIMIT 10;
-```
 
-```sql
-SELECT b.year,
-      b.first_name,
-      b.num
-FROM baby_names AS b
-INNER JOIN (SELECT year ,
-      MAX(num) AS max_num
-FROM baby_names
-WHERE sex = 'M'
-GROUP BY year) AS subquery
-ON b.year = subquery.year AND b.num = subquery.max_num
-ORDER BY year DESC
-```
-```sql
-WITH count_top_name AS (SELECT b.year,
-      b.first_name,
-      b.num
-FROM baby_names AS b
-INNER JOIN (SELECT year ,
-      MAX(num) AS max_num
-FROM baby_names
-WHERE sex = 'M'
-GROUP BY year) AS subquery
-ON b.year = subquery.year AND b.num = subquery.max_num
-ORDER BY year DESC)
-
-SELECT first_name,
-       COUNT(first_name) AS count_top_name
-FROM count_top_name
-GROUP BY first_name
-ORDER BY COUNT(first_name) DESC
-```
-
-### Results Findings
+### Data Analysis Results Findings
 
 ### 1- Classic American names
 After conducting an analysis of classic American names, the dataset reveals the frequency of occurrences for each name, indicating that 'James' is the most common, followed closely by 'John' and 'William'
+```sql
+SELECT first_name,
+       SUM(num)
+FROM baby_names
+GROUP BY first_name
+HAVING COUNT(year) = 101
+ORDER BY  SUM(num) DESC;
+```
 
 | first_name | sum      |
 | ---------- | -------- |
@@ -123,6 +86,20 @@ After conducting an analysis of classic American names, the dataset reveals the 
 
 Upon analyzing the dataset regarding the timelessness and trendiness of American names, it was found that there are 547 records in total. The table below showcases a sample of these records and their corresponding popularity types.
 
+```sql
+SELECT first_name ,
+       SUM(num),
+    CASE WHEN COUNT(year) > 80 THEN 'Classic'
+         WHEN COUNT(year) > 50 THEN 'Semi-classic'
+          WHEN COUNT(year) > 20 THEN 'Semi-trendy'
+         ELSE 'Trendy' END AS popularity_type
+        
+FROM baby_names
+GROUP BY first_name
+ORDER BY first_name;
+```
+
+
 | first_name | sum    | popularity_type |
 | ---------- | ------ | --------------- |
 | Aaliyah    | 15870  | Trendy          |
@@ -138,6 +115,19 @@ Upon analyzing the dataset regarding the timelessness and trendiness of American
 3- Top-ranked female names since 1920
 
 Through an analysis spanning from 1920 to the present, the following table represents the top-ranked female names, based on their frequency of occurrence within the specified period.
+
+
+```sql
+SELECT first_name ,
+       SUM(num),
+    RANK() OVER(ORDER BY SUM(num) DESC) AS name_rank
+FROM baby_names
+WHERE year >= 1920 AND sex = 'F'
+GROUP BY first_name
+ORDER BY name_rank ASC
+LIMIT 10;
+```
+
 
 | first_name | sum     | name_rank |
 | ---------- | ------- | --------- |
@@ -159,6 +149,18 @@ Perhaps a friend has heard of our work analyzing baby names and would like help 
 She's set on a traditionally female name ending in the letter 'a' since she's heard that vowels in baby names are trendy. She's also looking for a name that has been popular in the years since 2015.
 
 Let's see what we can do to find some options for this friend!
+
+
+```sql
+SELECT first_name
+FROM baby_names
+WHERE sex = 'F' AND year > 2015 AND first_name LIKE '%a'
+GROUP BY first_name 
+ORDER BY SUM(num) DESC;
+```
+
+
+
 
 | first_name |
 | ---------- |
@@ -185,6 +187,18 @@ Let's see what we can do to find some options for this friend!
 
 5- The Olivia expansion
 Based on the results in the previous task, we can see that Olivia is the most popular female name ending in 'A' since 2015. When did the name Olivia become so popular?
+
+
+```sql
+SELECT year ,
+      first_name,
+      num,
+        SUM(num) OVER(ORDER BY year) AS cumulative_olivias
+FROM baby_names
+WHERE first_name = 'Olivia'
+ORDER BY year ASC;
+```
+
 
 | year | first_name | num  | cumulative_olivias |
 | ---- | ---------- | ---- | ------------------ |
@@ -225,6 +239,18 @@ Based on the results in the previous task, we can see that Olivia is the most po
 Wow, Olivia has had a meteoric rise! Let's take a look at traditionally male names now. We saw in the first task that there are nine traditionally male names given to at least 5,000 babies every single year in our 101-year dataset! Those names are classics, but showing up in the dataset every year doesn't necessarily mean that the timeless names were the most popular. Let's explore popular male names a little further.
 
 In the next two tasks, we will build up to listing every year along with the most popular male name in that year. This presents a common problem: how do we find the greatest X in a group? Or, in the context of this problem, how do we find the male name given to the highest number of babies in a year?
+
+
+
+```sql
+SELECT year ,
+      MAX(num) AS max_num
+FROM baby_names
+WHERE sex = 'M'
+GROUP BY year;
+```
+
+
 
 | year | max_num |
 | ---- | ------- |
@@ -336,6 +362,24 @@ In the next two tasks, we will build up to listing every year along with the mos
 
 In the previous task, we found the maximum number of babies given any one male name in each year. Incredibly, the most popular name each year varied from being given to less than 20,000 babies to being given to more than 90,000!
 
+
+
+```sql
+SELECT b.year,
+      b.first_name,
+      b.num
+FROM baby_names AS b
+INNER JOIN (SELECT year ,
+      MAX(num) AS max_num
+FROM baby_names
+WHERE sex = 'M'
+GROUP BY year) AS subquery
+ON b.year = subquery.year AND b.num = subquery.max_num
+ORDER BY year DESC;
+```
+
+
+
 | year | first_name | num   |
 | ---- | ---------- | ----- |
 | 2020 | Liam       | 19659 |
@@ -444,6 +488,30 @@ In the previous task, we found the maximum number of babies given any one male n
 8- The most years at number one
 
 Noah and Liam have ruled the roost in the last few years, but if we scroll down in the results, it looks like Michael and Jacob have also spent a good number of years as the top name! Which name has been number one for the largest number of years? Let's use a common table expression to find out.
+
+
+
+```sql
+WITH count_top_name AS (SELECT b.year,
+      b.first_name,
+      b.num
+FROM baby_names AS b
+INNER JOIN (SELECT year ,
+      MAX(num) AS max_num
+FROM baby_names
+WHERE sex = 'M'
+GROUP BY year) AS subquery
+ON b.year = subquery.year AND b.num = subquery.max_num
+ORDER BY year DESC)
+
+SELECT first_name,
+       COUNT(first_name) AS count_top_name
+FROM count_top_name
+GROUP BY first_name
+ORDER BY COUNT(first_name) DESC;
+```
+
+
 
 | first_name | count_top_name |
 | ---------- | -------------- |
