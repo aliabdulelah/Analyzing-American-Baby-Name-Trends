@@ -3,7 +3,10 @@
 
 ## Table of contents 
 - [Project Overview](#project-Overview)
-
+- [Data Source](#Data-Source)
+- [Tools](#Tools)
+- [ Data Cleaning / Preparation](#Data-Cleaning-/-Preparation)
+- [Exploratory Data Analysis](#Exploratory-Data-Analysis)
 
 ## Project Overview
 By using the United States Social Security Administration data from 1920-to 2020, we analyze American baby name shifts. Explore trends, and changes in popular names over time, and compare century-old favorites with recent top names, offering insights relevant to both parents and businesses.
@@ -41,14 +44,14 @@ We'll use data published by the U.S. Social Security Administration spanning ove
 ### Exploratory Data Analysis
  EDA involves exploring the American baby name data to answer key questions, such as:
 
-1. Classic American names
-2. Timeless or trendy?
-3. Top-ranked female names since 1920
-4. Picking a baby name
-5. The Olivia expansion
-6. Many males with the same name
-7. Top male names over the years
-8. The most years at number one
+1. [Classic American names](#Classic-American-names)
+2. [Timeless or trendy?](#Timeless-or-trendy?)
+3. [Top-ranked female names since 1920](#Top-ranked-female-names-since-1920)
+4. [Picking a baby name](#Picking-a-baby-name)
+5. [The Olivia expansion](#The-Olivia-expansion)
+6. [Many males with the same name](#Many-males-with-the-same-name)
+7. [Top male names over the years](#Top-male-names-over-the-years)
+8. [The most years at number one](#The-most-years-at-number-one)
 
 
 ### Data Analysis
