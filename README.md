@@ -7,7 +7,7 @@
 - [Tools](#Tools)
 - [ Data Cleaning / Preparation](#Data-Cleaning-/-Preparation)
 - [Exploratory Data Analysis](#Exploratory-Data-Analysis)
-- [Results/Findings](#Results/Findings)
+- [Results/Findings](#Results-Findings)
 
 ## Project Overview
 By using the United States Social Security Administration data from 1920-to 2020, we analyze American baby name shifts. Explore trends, and changes in popular names over time, and compare century-old favorites with recent top names, offering insights relevant to both parents and businesses.
