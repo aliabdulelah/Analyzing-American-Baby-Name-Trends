@@ -44,7 +44,7 @@ We'll use data published by the U.S. Social Security Administration spanning ove
 ### Exploratory Data Analysis
  EDA involves exploring the American baby name data to answer key questions, such as:
 
-1. [Classic American names](#1-Classic-American-names)
+1. [Classic American names](#Classic-American-names)
 2. [Timeless or trendy?](#Timeless-or-trendy?)
 3. [Top-ranked female names since 1920](#Top-ranked-female-names-since-1920)
 4. [Picking a baby name](#Picking-a-baby-name)
