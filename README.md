@@ -2,7 +2,7 @@
 ![Hello_My_Name_](https://github.com/aliabdulelah/Analyzing-American-Baby-Name-Trends/assets/129835709/40af9d0d-4851-4eec-baa7-fa1d347600f4)
 
 ## Table of contents 
-
+- [Project Overview](#project-Overview)
 
 
 ## Project Overview
