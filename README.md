@@ -59,7 +59,7 @@ We'll use data published by the U.S. Social Security Administration spanning ove
 
 ### Data Analysis Results Findings
 
-### 1- Classic American names
+1- Classic American names
 After conducting an analysis of classic American names, the dataset reveals the frequency of occurrences for each name, indicating that 'James' is the most common, followed closely by 'John' and 'William'
 ```sql
 SELECT first_name,
