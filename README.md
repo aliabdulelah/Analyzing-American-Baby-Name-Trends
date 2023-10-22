@@ -5,7 +5,7 @@
 - [Project Overview](#project-Overview)
 - [Data Source](#Data-Source)
 - [Tools](#Tools)
-- [ Data Cleaning / Preparation](#Data-Cleaning-/-Preparation)
+- [ Data Cleaning / Preparation](#Data-Cleaning-Preparation)
 - [Exploratory Data Analysis](#Exploratory-Data-Analysis)
 - [Results/Findings](#Data-Analysis-Results-Findings)
 
@@ -30,7 +30,7 @@ We'll use data published by the U.S. Social Security Administration spanning ove
 
 
 
-### Data Cleaning / Preparation 
+### Data Cleaning Preparation 
 
  In the initial data preparation phase, we performed the following tasks:
 
