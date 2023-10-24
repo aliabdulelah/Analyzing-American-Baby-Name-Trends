@@ -23,7 +23,7 @@ We'll use data published by the U.S. Social Security Administration spanning ove
 
 
 ### Tools 
-- PostgreSQL - Data Cleaning
+- Excel - Data Cleaning
 - PostgreSQL - Data Analysis
 
 
